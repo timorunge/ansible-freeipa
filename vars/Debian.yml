@@ -1,5 +1,18 @@
 ---
 
+# FreeIPA packages
+freeipa_pkgs:
+  - freeipa-client
+  - freeipa-common
+
+# FreeIPA server packages
+freeipa_srv_pkgs:
+  - freeipa-admintools
+  - freeipa-server
+  - freeipa-server-dns
+  - freeipa-server-trust-ad
+  - freeipa-tests
+
 # FreeIPA dependency packages
 freeipa_dependency_pkgs:
   - bind9

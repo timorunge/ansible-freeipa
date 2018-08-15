@@ -1,0 +1,13 @@
+---
+
+# FreeIPA packages
+freeipa_pkgs:
+  - ipa-client
+  - ipa-client-common
+  - ipa-common
+
+# FreeIPA server packages
+freeipa_srv_pkgs:
+  - ipa-server
+  - ipa-server-common
+  - ipa-server-dns

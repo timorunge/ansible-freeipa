@@ -1,0 +1,50 @@
+---
+
+- fail:
+    msg: "Due to missing dependencies it's not possible to enable the FreeIPA server on Debian."
+  when: (freeipa_enable_server) and
+        (ansible_os_family == "Debian") and
+        (ansible_distribution == "Debian")
+
+- name: Gather FreeIPA specific patches
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "patches/{{ ansible_os_family }}-{{ ansible_distribution }}-{{ ansible_distribution_version }}-{{ freeipa_version }}.yml"
+      - "patches/{{ ansible_os_family }}-{{ ansible_distribution }}-{{ freeipa_version }}.yml"
+      - "patches/{{ ansible_os_family }}-{{ freeipa_version }}.yml"
+      skip: true
+
+- include_tasks: dependencies.yml
+
+- include_tasks: source-facts.yml
+
+- name: Generate checksum catalog
+  template:
+    dest: "{{ freeipa_install_dir }}/tmp/ansible_checksum_catalog.yml"
+    mode: 0600
+    src: checksum_catalog.yml.j2
+
+- name: Check for changes in checksum catalog
+  ignore_errors: yes
+  command: "diff {{ freeipa_install_dir }}/tmp/ansible_checksum_catalog.yml {{ freeipa_install_dir }}/ansible_checksum_catalog.yml"
+  register: freeipa_checksum_catalog
+  changed_when: freeipa_checksum_catalog.rc != 0
+
+- include_tasks: prepare.yml
+
+- include_tasks: preinst.yml
+
+- include_tasks: patch.yml
+
+- include_tasks: build.yml
+
+- include_tasks: make.yml
+
+- include_tasks: postinst.yml
+
+- name: Save checksum catalog
+  copy:
+    dest: "{{ freeipa_install_dir }}/ansible_checksum_catalog.yml"
+    remote_src: yes
+    src: "{{ freeipa_install_dir }}/tmp/ansible_checksum_catalog.yml"

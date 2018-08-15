@@ -5,6 +5,7 @@
   gather_facts: true
 
   vars:
+    freeipa_from_sources: true
     freeipa_version: 4.6.4
     freeipa_enable_server: true
     freeipa_patches: "{{ freeipa_default_patches }}"

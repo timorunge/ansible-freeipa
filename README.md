@@ -1,7 +1,7 @@
 freeipa
 =======
 
-This role is building and installing the
+This role is [mainly](#little-secret) building and installing the
 [FreeIPA binaries](https://www.freeipa.org/page/Main_Page) directly out of the
 source code.
 
@@ -36,6 +36,12 @@ can use the following Ansible roles for this:
 * [timorunge.freeipa_server](https://github.com/timorunge/ansible-freeipa-server)
 * [timorunge.freeipa_server_backup](https://github.com/timorunge/ansible-freeipa-server-backup)
 
+### Little secret
+
+To keep the usage of roles to an minumum you also have the possibility to
+install FreeIPA out of the repositories of your distribution
+(set `freeipa_from_sources: false`). RHEL based systems are supported.
+
 Requirements
 ------------
 
@@ -67,13 +73,16 @@ in this paragraph. For all variables, take a look at
 
 ```yaml
 
+# Enable FreeIPA server
+freeipa_enable_server: false
+
 # FreeIPA from source:
+
+# Install FreeIPA from sources
+freeipa_from_sources: true
 
 # Version definition:
 freeipa_version: 4.6.4
-
-# Enable server builds (installs additional packages)
-freeipa_enable_server: false
 
 # Install or don't install the SSSD dependency packages. If you're using a
 # 3rd party component (like timorunge.sssd) to install those packages
