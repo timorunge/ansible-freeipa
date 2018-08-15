@@ -14,7 +14,7 @@ services:
       ENABLE_SERVER: nope
       SSSD_REQUIRED: yes-sir
       TRAVIS: ${TRAVIS}
-      YML_TEST_FILE: test-from-timorunge.sssd.yml
+      YML_TEST_FILE: test-from-3rdparty-sssd-pkgs.yml
   ubuntu_18_04_pkgs:
     build:
       context: .
@@ -40,7 +40,7 @@ services:
       ENABLE_SERVER: yes-sir
       SSSD_REQUIRED: yes-sir
       TRAVIS: ${TRAVIS}
-      YML_TEST_FILE: test-from-timorunge.sssd.yml
+      YML_TEST_FILE: test-from-3rdparty-sssd-pkgs.yml
   ubuntu_18_10_pkgs:
     build:
       context: .
@@ -66,4 +66,4 @@ services:
       ENABLE_SERVER: yes-sir
       SSSD_REQUIRED: yes-sir
       TRAVIS: ${TRAVIS}
-      YML_TEST_FILE: test-from-timorunge.sssd.yml
+      YML_TEST_FILE: test-from-3rdparty-sssd-pkgs.yml

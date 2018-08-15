@@ -1,5 +1,6 @@
 ---
 
+# FreeIPA pip dependencies
 freeipa_pip_dependency_pkgs:
   - cryptography
   - custodia
@@ -14,8 +15,10 @@ freeipa_pip_dependency_pkgs:
   - gssapi
   - python-ldap
 
+# Empty dict to avoid failures
 freeipa_default_patches: []
 
+# HTTPD modules which have to be enabled
 freeipa_server_httpd_modules:
   - auth_gssapi
   - authz_user
@@ -30,6 +33,7 @@ freeipa_server_httpd_modules:
   - session
   - session_cookie
 
+# The FreeIPA service will take care of starting and stopping those services
 freeipa_server_disabled_services:
   - krb5-admin-server
   - slapd

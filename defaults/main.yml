@@ -11,9 +11,10 @@ freeipa_version_src_schema: "{{ freeipa_version | replace('.', '-') }}"
 # Enable server builds (installs additional packages)
 freeipa_enable_server: false
 
-# Remove build dependency packages (for custom SSSD installation)
-freeipa_remove_dependency_pkgs: []
-freeipa_remove_build_dependency_pkgs: []
+# Install or don't install the SSSD dependency packages. If you're using a
+# 3rd party component (like timorunge.sssd) to install those packages
+# ensure that those packages are installed before the execution of this role.
+freeipa_3rdparty_sssd_packages: false
 
 # Define the download url
 freeipa_download_url: https://github.com/freeipa/freeipa/archive
@@ -21,7 +22,7 @@ freeipa_download_url: https://github.com/freeipa/freeipa/archive
 # Final download url for the FreeIPA tarball
 freeipa_tarball_url: "{{ freeipa_download_url }}/release-{{ freeipa_version_src_schema }}.tar.gz"
 
-# The place where to unpack, configure, build and install FreeIPA
+# The place where to unpack, configure and build FreeIPA
 freeipa_install_dir: /usr/local/src/freeipa
 
 # Possibility creeate additional directories
@@ -37,7 +38,7 @@ freeipa_additional_dirs: []
 
 # In this section you can apply custom patches to FreeIPA.
 # You can find one example in the README.md.
-# The default patches are stored in `vars/patches/*-{{ freeipa_version }}.yml`
+# The default patches are stored in `vars/patches/{{ ansible_os_family }}-{{ freeipa_version }}.yml`
 freeipa_patches: "{{ freeipa_default_patches }}"
 
 # Build options

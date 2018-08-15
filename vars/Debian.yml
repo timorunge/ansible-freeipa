@@ -18,10 +18,22 @@ freeipa_dependency_pkgs:
   - samba-common
   - winbind
   - zip
-  # SSSD specific packages:
+
+# FreeIPA SSSD dependency packages
+freeipa_sssd_dependency_pkgs:
   - libnss-sss
   - libpam-sss
   - libsss-sudo
+  - python-libipa-hbac
+  - python-libsss-nss-idmap
+  - python-sss
+  - sssd
+
+# FreeIPA SSSD build dependency packages
+freeipa_build_sssd_dependency_pkgs:
+  - libsss-certmap-dev
+  - libsss-idmap-dev
+  - libsss-nss-idmap-dev
 
 # FreeIPA server dependencies
 # Missing on Debian:
@@ -166,14 +178,6 @@ freeipa_build_dependency_pkgs:
   - systemd
   - uuid-dev
   - xz-utils
-  # SSSD specific packages:
-  - libsss-certmap-dev
-  - libsss-idmap-dev
-  - libsss-nss-idmap-dev
-  - python-libipa-hbac
-  - python-libsss-nss-idmap
-  - python-sss
-  - sssd
 
 # Directories
 freeipa_dirs:

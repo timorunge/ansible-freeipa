@@ -69,9 +69,16 @@
 
 - name: Install FreeIPA dependencies
   package:
-    name: "{{ freeipa_dependency_pkgs | difference(freeipa_remove_dependency_pkgs) }}"
+    name: "{{ freeipa_dependency_pkgs }}"
     state: present
     update_cache: yes
+
+- name: Install FreeIPA SSSD dependencies
+  package:
+    name: "{{ freeipa_sssd_dependency_pkgs }}"
+    state: present
+    update_cache: yes
+  when: not freeipa_3rdparty_sssd_packages
 
 - name: Install FreeIPA server dependencies
   package:
@@ -82,9 +89,16 @@
 
 - name: Install FreeIPA build dependencies
   package:
-    name: "{{ freeipa_build_dependency_pkgs | difference(freeipa_remove_build_dependency_pkgs) }}"
+    name: "{{ freeipa_build_dependency_pkgs }}"
     state: present
     update_cache: yes
+
+- name: Install FreeIPA SSSD build dependencies
+  package:
+    name: "{{ freeipa_build_sssd_dependency_pkgs }}"
+    state: present
+    update_cache: yes
+  when: not freeipa_3rdparty_sssd_packages
 
 - name: Install FreeIPA pip dependencies
   pip:

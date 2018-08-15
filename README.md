@@ -10,15 +10,15 @@ distributions have an better FreeIPA coverage anyway.
 
 It's providing an easy way to patch the FreeIPA sources according to
 your needs. The role is getting shipped with tested and working default values
-and also with [patches for FreeIPA 4.6.4](files/patches/debian/4.6.4).
+and also with [patches for FreeIPA 4.6.4](files/patches/Debian/4.6.4).
 
 At the moment it's not possible to use this role to install FreeIPA server
 on Debian 9.4. Since the package `dogtag-pki` is not present. The FreeIPA
 client instead can be installed on Debian 9.4 if you combine this role with
 [timorunge.sssd](https://github.com/timorunge/ansible-sssd). For further
 details please take a look at the [dependencies](#dependencies),
-[example 4](#4-install-freeipa-with-timorunge.sssd) and
-[example 5](#install-freeipa-with-timorunge.sssd-and_timorunge.freeipa_client).
+[example 4](#4-install-freeipa-with-timorungesssd) and
+[example 5](#5-install-freeipa-with-timorungesssd-and-timorungefreeipa_client).
 
 Tested platforms are:
 * Debian
@@ -75,11 +75,16 @@ freeipa_version: 4.6.4
 # Enable server builds (installs additional packages)
 freeipa_enable_server: false
 
+# Install or don't install the SSSD dependency packages. If you're using a
+# 3rd party component (like timorunge.sssd) to install those packages
+# ensure that those packages are installed before the execution of this role.
+freeipa_3rdparty_sssd_packages: false
+
 # Patches
 
 # In this section you can apply custom patches to FreeIPA.
 # You can find one example in the README.md.
-# The default patches are stored in `vars/patches/*-{{ freeipa_version }}.yml`
+# The default patches are stored in `vars/patches/{{ ansible_os_family }}-{{ freeipa_version }}.yml`
 freeipa_patches: "{{ freeipa_default_patches }}"
 
 # Build options
@@ -92,7 +97,7 @@ Examples
 --------
 
 To keep the document lean the compile options are stripped.
-You can find the FreeIPA build options in [this document](#freeipa-build-options).
+You can find the FreeIPA build options in [this section](#freeipa-build-options).
 
 ### 1) Configure FreeIPA according to your needs
 
@@ -120,7 +125,7 @@ You can find the FreeIPA build options in [this document](#freeipa-build-options
     freeipa_patches:
       create-sysconfig-ods:
         dest_file: ipaserver/install/opendnssecinstance.py
-        patch_file: files/patches/debian/4.6.4/create-sysconfig-ods.diff
+        patch_file: files/patches/Debian/4.6.4/create-sysconfig-ods.diff
         state: present
   roles:
     - timorunge.freeipa
@@ -152,15 +157,7 @@ You can find the FreeIPA build options in [this document](#freeipa-build-options
     sssd_config_type: none
     freeipa_version: 4.6.4
     freeipa_enable_server: false
-    freeipa_remove_build_dependency_pkgs:
-      - libsss-certmap-dev
-      - libsss-idmap-dev
-      - libsss-nss-idmap-dev
-      - python-libipa-hbac
-      - python-libsss-nss-idmap
-      - python-sss
-      - sssd
-    freeipa_patches: "{{ freeipa_default_patches }}"
+    freeipa_3rdparty_sssd_packages: true
   roles:
     - timorunge.sssd
     - timorunge.freeipa
@@ -176,20 +173,8 @@ You can find the FreeIPA build options in [this document](#freeipa-build-options
     sssd_config_type: none
     freeipa_version: 4.6.4
     freeipa_enable_server: false
-    freeipa_remove_build_dependency_pkgs:
-      - libsss-certmap-dev
-      - libsss-idmap-dev
-      - libsss-nss-idmap-dev
-      - python-libipa-hbac
-      - python-libsss-nss-idmap
-      - python-sss
-      - sssd
-    freeipa_build_options:
-      - "--datadir=/usr/share"
-      - "--disable-rpath"
-      - "--disable-silent-rules"
+    freeipa_3rdparty_sssd_packages: true
       ...
-    freeipa_patches: "{{ freeipa_default_patches }}"
     freeipa_client_install_pkgs: false
     freeipa_client_domain: example.com
     freeipa_client_server: ipa.example.com
@@ -221,14 +206,7 @@ You can find the FreeIPA build options in [this document](#freeipa-build-options
     sssd_config_type: none
     freeipa_version: 4.6.4
     freeipa_enable_server: true
-    freeipa_remove_build_dependency_pkgs:
-      - libsss-certmap-dev
-      - libsss-idmap-dev
-      - libsss-nss-idmap-dev
-      - python-libipa-hbac
-      - python-libsss-nss-idmap
-      - python-sss
-      - sssd
+    freeipa_3rdparty_sssd_packages: true
     freeipa_server_install_pkgs: false
     freeipa_server_admin_password: Passw0rd
     freeipa_server_domain: example.com
@@ -465,7 +443,7 @@ Ansible 2.6.2 is installed on all containers and is applying two test
 playbooks:
 
 * [test-from-pkgs.yml](tests/test-from-pkgs.yml)
-* [test-from-timorunge.sssd.yml](tests/test-from-timorunge.sssd.yml)
+* [test-from-3rdparty-sssd-pkgs.yml](tests/test-from-3rdparty-sssd-pkgs.yml)
 
 For further details and additional checks take a look at the
 [Docker entrypoint](docker/docker-entrypoint.sh).
@@ -506,7 +484,7 @@ Since Debian 9.4 is not providing the SSSD package binaries you can use the
 following Ansible role:
 * [timorunge.sssd](https://github.com/timorunge/ansible-sssd)
 
-Take a look at [example 4](#4-install-freeipa-with-timorunge.sssd).
+Take a look at [example 4](#4-install-freeipa-with-timorungesssd).
 
 License
 -------
