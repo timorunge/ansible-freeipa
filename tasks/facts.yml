@@ -1,0 +1,15 @@
+---
+
+- name: Get Debian architecture
+  command: dpkg-architecture -qDEB_HOST_MULTIARCH
+  register: freeipa_dpkg_architecture_exec
+  changed_when: freeipa_dpkg_architecture_exec.rc != 0
+  when: ansible_os_family == "Debian"
+
+- set_fact:
+    freeipa_dpkg_architecture: "{{ freeipa_dpkg_architecture_exec.stdout }}"
+  when: ansible_os_family == "Debian"
+
+- set_fact:
+    freeipa_build_enable_server: enable-server
+  when: freeipa_enable_server

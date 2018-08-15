@@ -1,0 +1,92 @@
+---
+
+- name: Create groups
+  group:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ipaapi
+
+- name: Create server groups
+  group:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ freeipa_httpd_group }}"
+    - kdcproxy
+    - pkiuser
+  when: freeipa_enable_server
+
+- name: Create users
+  user:
+    create_home: yes
+    groups: "{{ item }}"
+    name: "{{ item }}"
+    shell: /usr/sbin/nologin
+  with_items:
+    - ipaapi
+
+- name: Create server users
+  user:
+    create_home: yes
+    groups: "{{ item }}"
+    name: "{{ item }}"
+    shell: /usr/sbin/nologin
+  with_items:
+    - kdcproxy
+    - pkiuser
+  when: freeipa_enable_server
+
+- name: Create httpd user with ipaaapi group
+  user:
+    create_home: yes
+    groups:
+      - "{{ freeipa_httpd_user }}"
+      - ipaapi
+    name: "{{ freeipa_httpd_user }}"
+    shell: /usr/sbin/nologin
+  when: freeipa_enable_server
+
+- name: Create directories
+  file:
+    group: "{{ item.value.group }}"
+    mode: "{{ item.value.mode }}"
+    owner: "{{ item.value.owner }}"
+    path: "{{ item.key }}"
+    state: directory
+  with_dict: "{{ freeipa_dirs | combine(freeipa_additional_dirs) }}"
+
+- name: Create httpd directories
+  file:
+    group: "{{ item.value.group }}"
+    mode: "{{ item.value.mode }}"
+    owner: "{{ item.value.owner }}"
+    path: "{{ item.key }}"
+    state: directory
+  with_dict: "{{ freeipa_httpd_dirs }}"
+  when: freeipa_enable_server and
+        freeipa_httpd_dirs
+
+- name: Install FreeIPA dependencies
+  package:
+    name: "{{ freeipa_dependency_pkgs | difference(freeipa_remove_dependency_pkgs) }}"
+    state: present
+    update_cache: yes
+
+- name: Install FreeIPA server dependencies
+  package:
+    name: "{{ freeipa_dependency_pkgs_srv }}"
+    state: present
+    update_cache: yes
+  when: freeipa_enable_server
+
+- name: Install FreeIPA build dependencies
+  package:
+    name: "{{ freeipa_build_dependency_pkgs | difference(freeipa_remove_build_dependency_pkgs) }}"
+    state: present
+    update_cache: yes
+
+- name: Install FreeIPA pip dependencies
+  pip:
+    name: "{{ freeipa_pip_dependency_pkgs | default(omit) }}"
+    state: present

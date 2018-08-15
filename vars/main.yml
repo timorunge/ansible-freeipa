@@ -1,0 +1,38 @@
+---
+
+freeipa_pip_dependency_pkgs:
+  - cryptography
+  - custodia
+  - dbus-python
+  - jslint
+  - jwcrypto
+  - kdcproxy
+  - osutil
+  - paramiko==2.2.0
+  - pyasn1
+  - pyasn1-modules
+  - gssapi
+  - python-ldap
+
+freeipa_default_patches: []
+
+freeipa_server_httpd_modules:
+  - auth_gssapi
+  - authz_user
+  - deflate
+  - expires
+  - headers
+  - lookup_identity
+  - proxy
+  - proxy_ajp
+  - proxy_http
+  - rewrite
+  - session
+  - session_cookie
+
+freeipa_server_disabled_services:
+  - krb5-admin-server
+  - slapd
+
+freeipa_server_disabled_httpd_services:
+  - tomcat8

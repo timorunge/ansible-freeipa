@@ -1,0 +1,28 @@
+---
+
+galaxy_info:
+  author: Timo Runge
+  description: FreeIPA Identity Management installation.
+  role_name: freeipa
+  license: BSD
+  min_ansible_version: 2.6
+  platforms:
+  - name: Debian
+    versions:
+      - stretch
+  - name: Ubuntu
+    versions:
+      - xenial
+      - artful
+      - bionic
+  galaxy_tags:
+    - dns
+    - freeipa
+    - identity
+    - idm
+    - kerberos
+    - ldap
+    - ntp
+    - sso
+    - sssd
+    - system

@@ -1,0 +1,13 @@
+---
+
+- name: Compile FreeIPA
+  make:
+    chdir: "{{ freeipa_install_dir }}/build/freeipa-release-{{ freeipa_version_src_schema }}"
+  when: freeipa_build.changed
+  register: freeipa_compile
+
+- name: Install FreeIPA
+  make:
+    chdir: "{{ freeipa_install_dir }}/build/freeipa-release-{{ freeipa_version_src_schema }}"
+    target: install
+  when: freeipa_compile.changed

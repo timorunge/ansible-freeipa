@@ -1,0 +1,14 @@
+--- a/ipaserver/install/ldapupdate.py
++++ b/ipaserver/install/ldapupdate.py
+@@ -330,9 +330,9 @@ class LDAPUpdate(object):
+         bits = platform.architecture()[0]
+ 
+         if bits == "64bit":
+-            return "64"
++            return "/x86_64-linux-gnu"
+         else:
+-            return ""
++            return "/i386-linux-gnu"
+ 
+     def _template_str(self, s):
+         try:

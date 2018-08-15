@@ -1,0 +1,6 @@
+---
+
+- name: restart httpd
+  service:
+    name: "{{ freeipa_httpd_service }}"
+    state: restarted

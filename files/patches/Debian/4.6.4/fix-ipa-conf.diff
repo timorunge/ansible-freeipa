@@ -1,0 +1,50 @@
+Description: Fix paths
+--- a/install/conf/ipa.conf
++++ b/install/conf/ipa.conf
+@@ -43,7 +43,7 @@
+
+ # FIXME: WSGISocketPrefix is a server-scope directive.  The mod_wsgi package
+ # should really be fixed by adding this its /etc/httpd/conf.d/wsgi.conf:
+-WSGISocketPrefix /run/httpd/wsgi
++WSGISocketPrefix /run/apache2/wsgi
+
+
+ # Configure mod_wsgi handler for /ipa
+@@ -77,7 +77,7 @@
+   # Uncomment the following to have shorter sessions, but beware this may break
+   # old IPA client tols that incorrectly parse cookies.
+   # SessionMaxAge 1800
+-  GssapiSessionKey file:/etc/httpd/alias/ipasession.key
++  GssapiSessionKey file:/etc/apache2/ipasession.key
+
+   GssapiImpersonate On
+   GssapiDelegCcacheDir /var/run/ipa/ccaches
+@@ -126,7 +126,7 @@
+   SessionCookieName ipa_session path=/ipa;httponly;secure;
+   SessionHeader IPASESSION
+   SessionMaxAge 1800
+-  GssapiSessionKey file:/etc/httpd/alias/ipasession.key
++  GssapiSessionKey file:/etc/apache2/ipasession.key
+
+   Header unset Set-Cookie
+ </Location>
+@@ -146,7 +146,7 @@
+ # Custodia stuff is redirected to the custodia daemon
+ # after authentication
+ <Location "/ipa/keys/">
+-    ProxyPass "unix:/run/httpd/ipa-custodia.sock|http://localhost/keys/"
++    ProxyPass "unix:/run/apache2/ipa-custodia.sock|http://localhost/keys/"
+     RequestHeader set GSS_NAME %{GSS_NAME}s
+     RequestHeader set REMOTE_USER %{REMOTE_USER}s
+ </Location>
+@@ -180,8 +180,8 @@
+
+
+ #  List explicitly only the fonts we want to serve
+-Alias /ipa/ui/fonts/open-sans "/usr/share/fonts/open-sans"
+-Alias /ipa/ui/fonts/fontawesome "/usr/share/fonts/fontawesome"
++Alias /ipa/ui/fonts/open-sans "/usr/share/fonts/truetype/open-sans"
++Alias /ipa/ui/fonts/fontawesome "/usr/share/fonts/truetype/font-awesome"
+ <Directory "/usr/share/fonts">
+   SetHandler None
+   AllowOverride None

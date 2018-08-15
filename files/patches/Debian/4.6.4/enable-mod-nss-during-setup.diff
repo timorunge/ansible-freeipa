@@ -1,0 +1,19 @@
+--- a/ipaserver/install/httpinstance.py
++++ b/ipaserver/install/httpinstance.py
+@@ -179,6 +179,7 @@ class HTTPInstance(service.Service):
+         if not self.is_kdcproxy_configured():
+             self.step("create KDC proxy config", self.create_kdcproxy_conf)
+             self.step("enable KDC proxy", self.enable_kdcproxy)
++        ipautil.run(["/usr/sbin/a2enmod", "nss"], capture_output=True)
+         self.step("starting httpd", self.start)
+         self.step("configuring httpd to start on boot", self.__enable)
+         self.step("enabling oddjobd", self.enable_and_start_oddjobd)
+@@ -525,6 +526,8 @@ class HTTPInstance(service.Service):
+             except Exception:
+                 pass
+ 
++        ipautil.run(["/usr/sbin/a2dismod", "nss"], capture_output=True)
++
+         self.stop_tracking_certificates()
+ 
+         helper = self.restore_state('certmonger_ipa_helper')

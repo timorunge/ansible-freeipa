@@ -1,0 +1,23 @@
+---
+
+- name: Downloading FreeIPA source
+  get_url:
+    dest: "{{ freeipa_install_dir }}/download/freeipa-release-{{ freeipa_version_src_schema }}.tar.gz"
+    url: "{{ freeipa_tarball_url }}"
+  register: freeipa_source_download
+
+- name: Unpacking FreeIPA source
+  unarchive:
+    copy: no
+    dest: "{{ freeipa_install_dir }}/build"
+    src: "{{ freeipa_source_download.dest }}"
+    extra_opts:
+      - "--overwrite"
+  when: freeipa_source_download.changed
+  register: freeipa_source_files
+
+- name: git init
+  args:
+    chdir: "{{ freeipa_install_dir }}/build/freeipa-release-{{ freeipa_version_src_schema }}"
+    creates: "{{ freeipa_install_dir }}/build/freeipa-release-{{ freeipa_version_src_schema }}/.git/config"
+  shell: git config --global user.email "root@$(hostname)" && git init && git add . && git commit -m "init FreeIPA {{ freeipa_version }}"

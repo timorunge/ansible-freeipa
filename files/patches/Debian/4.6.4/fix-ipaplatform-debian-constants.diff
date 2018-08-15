@@ -1,0 +1,10 @@
+--- a/ipaplatform/debian/constants.py	2018-08-10 13:35:32.000000000 +0200
++++ b/ipaplatform/debian/constants.py	2018-08-10 13:35:53.000000000 +0200
+@@ -14,6 +14,7 @@
+
+ class DebianConstantsNamespace(BaseConstantsNamespace):
+     HTTPD_USER = "www-data"
++    HTTPD_GROUP = "www-data"
+     NAMED_USER = "bind"
+     NAMED_GROUP = "bind"
+     # ntpd init variable used for daemon options

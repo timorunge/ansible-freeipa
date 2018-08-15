@@ -1,0 +1,43 @@
+---
+
+version: '2'
+services:
+  debian_9_4_sssd:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile_Debian_9.4
+      args:
+        ANSIBLE_VERSION: 2.6.2
+        ROLE_NAME: timorunge.freeipa
+        WORKDIR: /ansible
+    environment:
+      ENABLE_SERVER: nope
+      SSSD_REQUIRED: yes-sir
+      TRAVIS: ${TRAVIS}
+      YML_TEST_FILE: test-from-timorunge.sssd.yml
+  ubuntu_18_04_pkgs:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile_Ubuntu_18.04
+      args:
+        ANSIBLE_VERSION: 2.6.2
+        ROLE_NAME: timorunge.freeipa
+        WORKDIR: /ansible
+    environment:
+      ENABLE_SERVER: yes-sir
+      SSSD_REQUIRED: nope
+      TRAVIS: ${TRAVIS}
+      YML_TEST_FILE: test-from-pkgs.yml
+  ubuntu_18_04_sssd:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile_Ubuntu_18.04
+      args:
+        ANSIBLE_VERSION: 2.6.2
+        ROLE_NAME: timorunge.freeipa
+        WORKDIR: /ansible
+    environment:
+      ENABLE_SERVER: yes-sir
+      SSSD_REQUIRED: yes-sir
+      TRAVIS: ${TRAVIS}
+      YML_TEST_FILE: test-from-timorunge.sssd.yml

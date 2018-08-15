@@ -1,0 +1,33 @@
+Description: Fix ODS setup with 2.0.x
+--- a/ipaserver/dnssec/odsmgr.py
++++ b/ipaserver/dnssec/odsmgr.py
+@@ -12,6 +12,7 @@ except ImportError:
+     from xml.etree import ElementTree as etree
+
+ from ipapython import ipa_log_manager, ipautil
++from ipaplatform.paths import paths
+
+ logger = logging.getLogger(__name__)
+
+@@ -131,17 +132,18 @@ class ODSMgr(object):
+         self.zl_ldap = LDAPZoneListReader()
+
+     def ksmutil(self, params):
+-        """Call ods-ksmutil with given parameters and return stdout.
++        """Call ods-enforcer with given parameters and return stdout.
+
+         Raises CalledProcessError if returncode != 0.
+         """
+-        cmd = ['ods-ksmutil'] + params
++        cmd = [paths.ODS_ENFORCER] + params
+         result = ipautil.run(cmd, capture_output=True)
+         return result.output
+
+     def get_ods_zonelist(self):
+         stdout = self.ksmutil(['zonelist', 'export'])
+-        reader = ODSZoneListReader(stdout)
++        with open(paths.OPENDNSSEC_ZONELIST_FILE) as f:
++            reader = ODSZoneListReader(f.read())
+         return reader
+
+     def add_ods_zone(self, uuid, name):

@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+freeipa_build_options: {{ freeipa_build_options | hash('sha1') }}
+freeipa_download_url: {{ freeipa_download_url | hash('sha1') }}
+freeipa_enable_server: {{ freeipa_enable_server | hash('sha1') }}
+freeipa_install_dir: {{ freeipa_install_dir | hash('sha1') }}
+freeipa_patches: {{ freeipa_patches | hash('sha1') }}
+freeipa_remove_build_dependency_pkgs: {{ freeipa_remove_build_dependency_pkgs | hash('sha1') }}
+freeipa_remove_dependency_pkgs: {{ freeipa_remove_dependency_pkgs | hash('sha1') }}
+freeipa_tarball_url: {{ freeipa_tarball_url | hash('sha1') }}
+freeipa_version: {{ freeipa_version | hash('sha1') }}

@@ -1,0 +1,11 @@
+--- a/ipaplatform/debian/paths.py	2018-06-11 14:48:09.000000000 +0200
++++ b/ipaplatform/debian/paths.py	2018-08-14 14:59:40.000000000 +0200
+@@ -25,7 +25,7 @@
+     HTTPD_CONF_D_DIR = "/etc/apache2/conf-enabled/"
+     HTTPD_IPA_KDCPROXY_CONF_SYMLINK = "/etc/apache2/conf-enabled/ipa-kdc-proxy.conf"
+     HTTPD_IPA_PKI_PROXY_CONF = "/etc/apache2/conf-enabled/ipa-pki-proxy.conf"
+-    HTTPD_IPA_REWRITE_CONF = "/etc/apache2/conf-available/ipa-rewrite.conf"
++    HTTPD_IPA_REWRITE_CONF = "/etc/apache2/conf-enabled/ipa-rewrite.conf"
+     HTTPD_IPA_CONF = "/etc/apache2/conf-enabled/ipa.conf"
+     HTTPD_NSS_CONF = "/etc/apache2/mods-available/nss.conf"
+     OLD_IPA_KEYTAB = "/etc/apache2/ipa.keytab"

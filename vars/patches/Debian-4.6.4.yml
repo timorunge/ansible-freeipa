@@ -1,0 +1,55 @@
+---
+
+freeipa_default_patches:
+  create-sysconfig-ods:
+    dest_file: ipaserver/install/opendnssecinstance.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/create-sysconfig-ods.diff"
+    state: present
+  enable-mod-nss-during-setup:
+    dest_file: ipaserver/install/httpinstance.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/enable-mod-nss-during-setup.diff"
+    state: present
+  fix-ipa-conf:
+    dest_file: install/conf/ipa.conf
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-ipa-conf.diff"
+    state: present
+  fix-ipaplatform-debian-constants:
+    dest_file: ipaplatform/debian/constants.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-ipaplatform-debian-constants.diff"
+    state: present
+  fix-ipaplatform-debian-paths:
+    dest_file: ipaplatform/debian/paths.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-ipaplatform-debian-paths.diff"
+    state: present
+  fix-named-conf-template:
+    dest_file: install/share/bind.named.conf.template
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-named-conf-template.diff"
+    state: present
+  fix-opendnssec-setup-1:
+    dest_file: ipaserver/install/opendnssecinstance.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-opendnssec-setup-1.diff"
+    state: present
+  fix-opendnssec-setup-2:
+    dest_file: install/share/opendnssec_conf.template
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-opendnssec-setup-2.diff"
+    state: present
+  fix-opendnssec-setup-3:
+    dest_file: ipaplatform/base/paths.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-opendnssec-setup-3.diff"
+    state: present
+  fix-opendnssec-setup-4:
+    dest_file: ipaserver/dnssec/odsmgr.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-opendnssec-setup-4.diff"
+    state: present
+  fix-replicainstall:
+    dest_file: ipaserver/install/server/replicainstall.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-replicainstall.diff"
+    state: present
+  fix-typo-dependencies:
+    dest_file: ipasetup.py.in
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/fix-typo-dependencies.diff"
+    state: present
+  hack-libarch:
+    dest_file: ipaserver/install/ldapupdate.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/hack-libarch.diff"
+    state: present

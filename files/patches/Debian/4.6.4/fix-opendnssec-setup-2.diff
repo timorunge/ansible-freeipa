@@ -1,0 +1,12 @@
+Description: Fix ODS setup with 2.0.x
+--- a/install/share/opendnssec_conf.template
++++ b/install/share/opendnssec_conf.template
+@@ -8,7 +8,7 @@
+ 			<Module>$SOFTHSM_LIB</Module>
+ 			<TokenLabel>$TOKEN_LABEL</TokenLabel>
+ 			<PIN>$PIN</PIN>
+-            <AllowExtraction/>
++			<AllowExtraction/>
+ 		</Repository>
+
+ 	</RepositoryList>

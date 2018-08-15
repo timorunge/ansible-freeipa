@@ -1,0 +1,29 @@
+---
+
+- hosts: localhost
+  remote_user: root
+  gather_facts: true
+
+  vars:
+    sssd_from_sources: true
+    sssd_version: 1.16.3
+    sssd_config_type: none
+    freeipa_version: 4.6.4
+    freeipa_enable_server: true
+    freeipa_remove_build_dependency_pkgs:
+      - libsss-certmap-dev
+      - libsss-idmap-dev
+      - libsss-nss-idmap-dev
+      - python-libipa-hbac
+      - python-libsss-nss-idmap
+      - python-sss
+      - sssd
+    freeipa_remove_dependency_pkgs:
+      - libnss-sss
+      - libpam-sss
+      - libsss-sudo
+    freeipa_patches: "{{ freeipa_default_patches }}"
+    freeipa_build_options: "{{ freeipa_default_build_options }}"
+  roles:
+    - timorunge.sssd
+    - timorunge.freeipa

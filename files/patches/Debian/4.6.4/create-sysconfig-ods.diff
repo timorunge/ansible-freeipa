@@ -1,0 +1,12 @@
+--- a/ipaserver/install/opendnssecinstance.py
++++ b/ipaserver/install/opendnssecinstance.py
+@@ -197,6 +197,9 @@ class OpenDNSSECInstance(service.Service
+         if not self.fstore.has_file(paths.SYSCONFIG_ODS):
+             self.fstore.backup_file(paths.SYSCONFIG_ODS)
+
++        # create the configfile, opendnssec-enforcer doesn't ship it
++        open(paths.SYSCONFIG_ODS, 'a').close()
++
+         installutils.set_directive(paths.SYSCONFIG_ODS,
+                                    'SOFTHSM2_CONF',
+                                     paths.DNSSEC_SOFTHSM2_CONF,
