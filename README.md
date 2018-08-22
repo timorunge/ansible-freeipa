@@ -13,8 +13,8 @@ your needs. The role is getting shipped with tested and working default values
 and also with [patches for FreeIPA 4.6.4](files/patches/Debian/4.6.4).
 
 At the moment it's not possible to use this role to install FreeIPA server
-on Debian 9.4. Since the package `dogtag-pki` is not present. The FreeIPA
-client instead can be installed on Debian 9.4 if you combine this role with
+on Debian 9.4 since the package `dogtag-pki` is not present. The FreeIPA
+client can be installed on Debian 9.4 if you combine this role with
 [timorunge.sssd](https://github.com/timorunge/ansible-sssd). For further
 details please take a look at the [dependencies](#dependencies),
 [example 4](#4-install-freeipa-with-timorungesssd) and
@@ -158,6 +158,9 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 
 ### 4) Install FreeIPA with timorunge.sssd
 
+Ensure that the SSSD role is applied before FreeIPA. FreeIPA has
+dependencies on the SSSD libraries.
+
 ```yaml
 - hosts: freeipa
   vars:
@@ -173,6 +176,9 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 ```
 
 ### 5) Install FreeIPA with timorunge.sssd and timorunge.freeipa_client
+
+Ensure that the SSSD role is applied before FreeIPA. FreeIPA has
+dependencies on the SSSD libraries.
 
 ```yaml
 - hosts: freeipa-client
@@ -206,6 +212,9 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 ```
 
 ### 6) Install FreeIPA with timorunge.sssd and timorunge.freeipa_server
+
+Ensure that the SSSD role is applied before FreeIPA. FreeIPA has
+dependencies on the SSSD libraries.
 
 ```yaml
 - hosts: freeipa-server
@@ -489,8 +498,8 @@ pkg-config --modversion sss_idmap
 pkg-config --modversion sss_nss_idmap
 ```
 
-Since Debian 9.4 is not providing the SSSD package binaries you can use the
-following Ansible role:
+Since Debian 9.4 is not providing actual SSSD libraries and binaries
+(>= 1.15.2) you can use the following Ansible role:
 * [timorunge.sssd](https://github.com/timorunge/ansible-sssd)
 
 Take a look at [example 4](#4-install-freeipa-with-timorungesssd).

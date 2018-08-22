@@ -53,3 +53,11 @@ freeipa_default_patches:
     dest_file: ipaserver/install/ldapupdate.py
     patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/hack-libarch.diff"
     state: present
+  hack-tomcat-race:
+    dest_file: ipaserver/install/cainstance.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/hack-tomcat-race.diff"
+    state: present
+  support-pam-mkhomedir:
+    dest_file: ipaplatform/debian/tasks.py
+    patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/support-pam-mkhomedir.diff"
+    state: present

@@ -1,0 +1,11 @@
+--- a/ipaserver/install/cainstance.py
++++ b/ipaserver/install/cainstance.py
+@@ -1746,6 +1746,8 @@
+     match = re.search(r'^profile\.list=(\S*)', cs_cfg, re.MULTILINE)
+     profile_ids = match.group(1).split(',')
+
++    time.sleep(80)
++
+     for profile_id in profile_ids:
+         match = re.search(
+             r'^profile\.{}\.config=(\S*)'.format(profile_id),

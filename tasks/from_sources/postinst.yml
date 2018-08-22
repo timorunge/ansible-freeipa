@@ -20,7 +20,7 @@
   notify: restart httpd
   when: freeipa_enable_server
 
-- name: Stop and disable services which are manged otherwise by IPA
+- name: Stop and disable services which are manged by FreeIPA
   service:
     name: "{{ item }}"
     state: stopped
@@ -28,7 +28,7 @@
   with_items: "{{ freeipa_server_disabled_services }}"
   when: freeipa_server_disabled_services
 
-- name: Stop and disable httpd services which are manged otherwise by IPA
+- name: Stop and disable httpd services which are manged by FreeIPA
   service:
     name: "{{ item }}"
     state: stopped

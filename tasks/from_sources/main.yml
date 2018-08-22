@@ -13,6 +13,7 @@
       - "patches/{{ ansible_os_family }}-{{ ansible_distribution }}-{{ ansible_distribution_version }}-{{ freeipa_version }}.yml"
       - "patches/{{ ansible_os_family }}-{{ ansible_distribution }}-{{ freeipa_version }}.yml"
       - "patches/{{ ansible_os_family }}-{{ freeipa_version }}.yml"
+      - "patches/{{ freeipa_version }}.yml"
       skip: true
 
 - include_tasks: dependencies.yml

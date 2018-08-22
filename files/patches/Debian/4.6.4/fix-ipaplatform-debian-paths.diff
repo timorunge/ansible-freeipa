@@ -1,5 +1,5 @@
---- a/ipaplatform/debian/paths.py	2018-06-11 14:48:09.000000000 +0200
-+++ b/ipaplatform/debian/paths.py	2018-08-14 14:59:40.000000000 +0200
+--- a/ipaplatform/debian/paths.py
++++ b/ipaplatform/debian/paths.py
 @@ -25,7 +25,7 @@
      HTTPD_CONF_D_DIR = "/etc/apache2/conf-enabled/"
      HTTPD_IPA_KDCPROXY_CONF_SYMLINK = "/etc/apache2/conf-enabled/ipa-kdc-proxy.conf"
@@ -9,3 +9,23 @@
      HTTPD_IPA_CONF = "/etc/apache2/conf-enabled/ipa.conf"
      HTTPD_NSS_CONF = "/etc/apache2/mods-available/nss.conf"
      OLD_IPA_KEYTAB = "/etc/apache2/ipa.keytab"
+@@ -37,6 +37,7 @@
+     NAMED_ROOT_KEY = "/etc/bind/bind.keys"
+     NAMED_BINDKEYS_FILE = "/etc/bind/bind.keys"
+     NAMED_MANAGED_KEYS_DIR = "/var/cache/bind/dynamic"
++    CHRONY_CONF = "/etc/chrony/chrony.conf"
+     OPENLDAP_LDAP_CONF = "/etc/ldap/ldap.conf"
+     ETC_DEBIAN_VERSION = "/etc/debian_version"
+     IPA_P11_KIT = "/usr/local/share/ca-certificates/ipa-ca.crt"
+@@ -59,9 +60,11 @@
+     SYSTEMD_SYSTEM_HTTPD_IPA_CONF = "/etc/systemd/system/apache2.service.d/ipa.conf"
+     DNSSEC_TRUSTED_KEY = "/etc/bind/trusted-key.key"
+     OLD_KRA_AGENT_PEM = "/etc/apache2/nssdb/kra-agent.pem"
++    KEYCTL = "/bin/keyctl"
+     SBIN_SERVICE = "/usr/sbin/service"
+     CERTMONGER_COMMAND_TEMPLATE = "/usr/lib/ipa/certmonger/%s"
+     UPDATE_CA_TRUST = "/usr/sbin/update-ca-certificates"
++    BIND_LDAP_SO = "/usr/lib/{0}/bind/ldap.so".format(MULTIARCH)
+     BIND_LDAP_DNS_IPA_WORKDIR = "/var/cache/bind/dyndb-ldap/ipa/"
+     BIND_LDAP_DNS_ZONE_WORKDIR = "/var/cache/bind/dyndb-ldap/ipa/master/"
+     LIBSOFTHSM2_SO = "/usr/lib/softhsm/libsofthsm2.so"
