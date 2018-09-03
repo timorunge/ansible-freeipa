@@ -52,7 +52,7 @@ or higher in order to apply [patches](#2-apply-patches-to-the-source).
 You can simply use pip to install (and define) a stable version:
 
 ```sh
-pip install ansible==2.6.2
+pip install ansible==2.6.3
 ```
 
 All platform requirements are listed in the metadata file.
@@ -134,7 +134,7 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
     freeipa_patches:
       create-sysconfig-ods:
         dest_file: ipaserver/install/opendnssecinstance.py
-        patch_file: files/patches/Debian/4.6.4/create-sysconfig-ods.diff
+        patch_file: "files/patches/{{ ansible_os_family }}/{{ freeipa_version }}/create-sysconfig-ods.diff"
         state: present
   roles:
     - timorunge.freeipa
@@ -450,34 +450,29 @@ Testing
 
 [![Build Status](https://travis-ci.org/timorunge/ansible-freeipa.svg?branch=master)](https://travis-ci.org/timorunge/ansible-freeipa)
 
-Testing is done with [Docker Compose](https://docs.docker.com/compose/) which
-is bringing up the following containers:
+Tests are done with [Docker](https://www.docker.com) and
+[docker_test_runner](https://github.com/timorunge/docker-test-runner) which
+brings up the following containers with different environment settings:
 
 * Debian 9.4 (Stretch)
 * Ubuntu 18.04 (Bionic Beaver)
 * Ubuntu 18.10 (Cosmic Cuttlefish)
 
-Ansible 2.6.2 is installed on all containers and is applying two test
-playbooks:
-
-* [test-from-pkgs.yml](tests/test-from-pkgs.yml)
-* [test-from-3rdparty-sssd-pkgs.yml](tests/test-from-3rdparty-sssd-pkgs.yml)
+Ansible 2.6.3 is installed on all containers and a
+[test playbook](tests/test.yml) is getting applied.
 
 For further details and additional checks take a look at the
-[Docker entrypoint](docker/docker-entrypoint.sh).
+[docker_test_runner configuration](tests/docker_test_runner.yml) and the
+[Docker entrypoint](tests/docker/docker-entrypoint.sh).
 
 ```sh
-# Testing locally with docker-compose:
-docker-compose config
-docker-compose pull
-docker-compose build
-docker-compose up --no-start
-docker-compose up
-docker-compose down
+# Testing locally:
+curl https://raw.githubusercontent.com/timorunge/docker-test-runner/master/install.sh | sh
+./docker_test_runner.py -f tests/docker_test_runner.yml
 ```
 
 Since the build time on Travis is limited for public repositories the
-[automated tests](.travis-docker-compose.yml) are limited to:
+automated tests are limited to:
 
 * Debian 9.4 (Stretch)
 * Ubuntu 18.04 (Bionic Beaver)

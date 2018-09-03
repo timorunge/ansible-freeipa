@@ -5,13 +5,14 @@
   gather_facts: true
 
   vars:
-    sssd_from_sources: true
+    sssd_from_sources: false
     sssd_version: 1.16.3
     sssd_config_type: none
-    freeipa_from_sources: true
+    freeipa_from_sources: false
     freeipa_version: 4.6.4
-    freeipa_enable_server: true
-    freeipa_3rdparty_sssd_packages: true
+    freeipa_enable_server: false
+    freeipa_3rdparty_sssd_packages: false
+
   roles:
     - timorunge.sssd
     - timorunge.freeipa
