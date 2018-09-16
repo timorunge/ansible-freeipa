@@ -22,12 +22,12 @@ details please take a look at the [dependencies](#dependencies),
 
 Tested platforms are:
 * Debian
-  * 9.4
+  * 9.4 (Stretch)
     Requires
     * [timorunge.sssd](https://github.com/timorunge/ansible-sssd)
 * Ubuntu
-  * 18.04
-  * 18.10
+  * 18.04 (Bionic Beaver)
+  * 18.10 (Cosmic Cuttlefish)
 
 The role is not build for the setup or configuration of FreeIPA itself. You
 can use the following Ansible roles for this:

@@ -1,5 +1,7 @@
 ---
 
+project_name: FreeIPA
+
 threads: 4
 
 log_level: INFO
