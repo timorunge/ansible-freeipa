@@ -1,12 +1,14 @@
 ---
 
 # FreeIPA packages
+# Type: List
 freeipa_pkgs:
   - ipa-client
   - ipa-client-common
   - ipa-common
 
 # FreeIPA server packages
+# Type: List
 freeipa_srv_pkgs:
   - ipa-server
   - ipa-server-common

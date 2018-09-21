@@ -1,11 +1,13 @@
 ---
 
 # FreeIPA packages
+# Type: List
 freeipa_pkgs:
   - freeipa-client
   - freeipa-common
 
 # FreeIPA server packages
+# Type: List
 freeipa_srv_pkgs:
   - freeipa-admintools
   - freeipa-server
@@ -14,6 +16,7 @@ freeipa_srv_pkgs:
   - freeipa-tests
 
 # FreeIPA dependency packages
+# Type: List
 freeipa_dependency_pkgs:
   - bind9
   - bind9utils
@@ -33,6 +36,7 @@ freeipa_dependency_pkgs:
   - zip
 
 # FreeIPA SSSD dependency packages
+# Type: List
 freeipa_sssd_dependency_pkgs:
   - libnss-sss
   - libpam-sss
@@ -43,12 +47,14 @@ freeipa_sssd_dependency_pkgs:
   - sssd
 
 # FreeIPA SSSD build dependency packages
+# Type: List
 freeipa_build_sssd_dependency_pkgs:
   - libsss-certmap-dev
   - libsss-idmap-dev
   - libsss-nss-idmap-dev
 
 # FreeIPA server dependencies
+# Type: List
 # Missing on Debian:
 # - dogtag-pki
 # - fonts-open-sans
@@ -90,6 +96,7 @@ freeipa_dependency_pkgs_srv:
   - tomcat8
 
 # FreeIPA build dependency packages
+# Type: List
 freeipa_build_dependency_pkgs:
   - 389-ds-base-dev
   - apt-utils
@@ -193,16 +200,17 @@ freeipa_build_dependency_pkgs:
   - xz-utils
 
 # Directories
+# Type: Dict
 freeipa_dirs:
-  '/usr/share/man/man1':
+  "/usr/share/man/man1":
     group: root
     mode: !!str 0755
     owner: root
-  '/var/run/ipa':
+  "/var/run/ipa":
     group: ipaapi
     mode: !!str 0711
     owner: root
-  '/var/run/ipa/ccaches':
+  "/var/run/ipa/ccaches":
     group: ipaapi
     mode: !!str 0770
     owner: ipaapi
@@ -218,26 +226,28 @@ freeipa_dirs:
     group: root
     mode: !!str 0755
     owner: root
-
 freeipa_httpd_dirs:
-  '/var/run/apache2/ipa':
+  "/var/run/apache2/ipa":
     group: "{{ freeipa_httpd_user }}"
     mode: !!str 0700
     owner: "{{ freeipa_httpd_user }}"
-  '/var/run/apache2/ipa/clientcaches':
+  "/var/run/apache2/ipa/clientcaches":
     group: "{{ freeipa_httpd_user }}"
     mode: !!str 0700
     owner: "{{ freeipa_httpd_user }}"
-  '/var/run/apache2/ipa/krbcache':
+  "/var/run/apache2/ipa/krbcache":
     group: "{{ freeipa_httpd_user }}"
     mode: !!str 0700
     owner: "{{ freeipa_httpd_user }}"
 
+# httpd service information
+# Type: Str
 freeipa_httpd_service: apache2
 freeipa_httpd_user: www-data
 freeipa_httpd_group: "{{ freeipa_httpd_user }}"
 
 # FreeIPA default build options
+# Type: List
 freeipa_default_build_options:
   - "--datadir=/usr/share"
   - "--disable-rpath"

@@ -4,14 +4,14 @@
   group:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - ipaapi
 
 - name: Create server groups
   group:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - "{{ freeipa_httpd_group }}"
     - kdcproxy
     - pkiuser
@@ -23,7 +23,7 @@
     groups: "{{ item }}"
     name: "{{ item }}"
     shell: /usr/sbin/nologin
-  with_items:
+  loop:
     - ipaapi
 
 - name: Create server users
@@ -32,7 +32,7 @@
     groups: "{{ item }}"
     name: "{{ item }}"
     shell: /usr/sbin/nologin
-  with_items:
+  loop:
     - kdcproxy
     - pkiuser
   when: freeipa_enable_server
@@ -54,7 +54,7 @@
     owner: "{{ item.value.owner }}"
     path: "{{ item.key }}"
     state: directory
-  with_dict: "{{ freeipa_dirs | combine(freeipa_additional_dirs) }}"
+  loop: "{{ (freeipa_dirs | combine(freeipa_additional_dirs)) | dict2items }}"
 
 - name: Create httpd directories
   file:
@@ -63,7 +63,7 @@
     owner: "{{ item.value.owner }}"
     path: "{{ item.key }}"
     state: directory
-  with_dict: "{{ freeipa_httpd_dirs }}"
+  loop: "{{ freeipa_httpd_dirs | dict2items }}"
   when: freeipa_enable_server and
         freeipa_httpd_dirs
 

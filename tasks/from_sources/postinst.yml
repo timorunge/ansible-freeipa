@@ -25,7 +25,7 @@
     name: "{{ item }}"
     state: stopped
     enabled: no
-  with_items: "{{ freeipa_server_disabled_services }}"
+  loop: "{{ freeipa_server_disabled_services | flatten(levels=1) }}"
   when: freeipa_server_disabled_services
 
 - name: Stop and disable httpd services which are manged by FreeIPA
@@ -33,6 +33,6 @@
     name: "{{ item }}"
     state: stopped
     enabled: no
-  with_items: "{{ freeipa_server_disabled_httpd_services }}"
+  loop: "{{ freeipa_server_disabled_httpd_services | flatten(levels=1) }}"
   when: freeipa_enable_server and
         freeipa_server_disabled_httpd_services

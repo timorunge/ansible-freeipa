@@ -12,10 +12,20 @@ test -z ${sssd_version} && echo "Missing environment variable: sssd_version" && 
 
 test -z ${yml_file} && echo "Missing environment variable: yml_file" && exit 1
 
-test "true" = "${sssd_from_sources}" && ansible-galaxy install timorunge.sssd
+test "True" = "${sssd_from_sources}" && ansible-galaxy install timorunge.sssd
 
-ansible-lint /ansible/${yml_file}
-ansible-lint /etc/ansible/roles/${ansible_role}/tasks/main.yml
+if [ ! -f /etc/ansible/lint.zip ]; then
+  wget https://github.com/ansible/galaxy-lint-rules/archive/master.zip -O \
+  /etc/ansible/lint.zip
+  unzip /etc/ansible/lint.zip -d /etc/ansible/lint
+fi
+
+ansible-lint -c /etc/ansible/roles/${ansible_role}/.ansible-lint -r \
+  /etc/ansible/lint/galaxy-lint-rules-master/rules \
+  /etc/ansible/roles/${ansible_role}
+ansible-lint -c /etc/ansible/roles/${ansible_role}/.ansible-lint -r \
+  /etc/ansible/lint/galaxy-lint-rules-master/rules \
+  /ansible/test.yml
 
 ansible-playbook /ansible/${yml_file} \
   -i /ansible/inventory \
@@ -52,7 +62,7 @@ ansible-playbook /ansible/${yml_file} \
   (echo "Idempotence test: pass" && exit 0) || \
   (echo "Idempotence test: fail" && exit 1)
 
-if [ "true" = "${freeipa_from_sources}" ] && [ "true" = "${freeipa_enable_server}" ] ; then
+if [ "True" = "${freeipa_from_sources}" ] && [ "True" = "${freeipa_enable_server}" ] ; then
   real_freeipa_version=$(ipa --version | awk '{print $2}' | tr -d "," 2>&1)
   test "${real_freeipa_version}" = "${freeipa_version}" && \
     (echo "FreeIPA version test: pass" && exit 0) || \

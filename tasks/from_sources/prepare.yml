@@ -13,8 +13,8 @@
     src: "{{ freeipa_source_download.dest }}"
     extra_opts:
       - "--overwrite"
-  when: freeipa_source_download.changed
   register: freeipa_source_files
+  when: freeipa_source_download.changed
 
 - name: git init
   args:

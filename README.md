@@ -40,7 +40,7 @@ can use the following Ansible roles for this:
 
 To keep the usage of roles to an minumum you also have the possibility to
 install FreeIPA out of the repositories of your distribution
-(set `freeipa_from_sources: false`). RHEL based systems are supported.
+(set `freeipa_from_sources: False`). RHEL based systems are supported.
 
 Requirements
 ------------
@@ -74,31 +74,37 @@ in this paragraph. For all variables, take a look at
 ```yaml
 
 # Enable FreeIPA server
-freeipa_enable_server: false
+# Type: Bookl
+freeipa_enable_server: False
 
 # FreeIPA from source:
 
 # Install FreeIPA from sources
-freeipa_from_sources: true
+# Type: Bool
+freeipa_from_sources: True
 
 # Version definition:
+# Type: Int
 freeipa_version: 4.6.4
 
 # Install or don't install the SSSD dependency packages. If you're using a
 # 3rd party component (like timorunge.sssd) to install those packages
 # ensure that those packages are installed before the execution of this role.
-freeipa_3rdparty_sssd_packages: false
+# Type: Bool
+freeipa_3rdparty_sssd_packages: False
 
 # Patches
 
 # In this section you can apply custom patches to FreeIPA.
 # You can find one example in the README.md.
 # The default patches are stored in `vars/patches/{{ ansible_os_family }}-{{ freeipa_version }}.yml`
+# Type: Dict
 freeipa_patches: "{{ freeipa_default_patches }}"
 
 # Build options
 
 # The default build options are stored in `vars/{{ ansible_os_family }}.yml`
+# Type: List
 freeipa_build_options: "{{ freeipa_default_build_options }}"
 ```
 
@@ -114,7 +120,7 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 - hosts: freeipa
   vars:
     freeipa_version: 4.6.4
-    freeipa_enable_server: false
+    freeipa_enable_server: False
     freeipa_build_options:
       - "--datadir=/usr/share"
       - "--disable-rpath"
@@ -130,7 +136,7 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 - hosts: freeipa
   vars:
     freeipa_version: 4.6.4
-    freeipa_enable_server: false
+    freeipa_enable_server: False
     freeipa_patches:
       create-sysconfig-ods:
         dest_file: ipaserver/install/opendnssecinstance.py
@@ -146,7 +152,7 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 - hosts: freeipa-client
   vars:
     freeipa_version: 4.6.4
-    freeipa_enable_server: false
+    freeipa_enable_server: False
     freeipa_build_options:
       - "--datadir=/usr/share"
       - "--disable-rpath"
@@ -164,12 +170,12 @@ dependencies on the SSSD libraries.
 ```yaml
 - hosts: freeipa
   vars:
-    sssd_from_sources: true
+    sssd_from_sources: True
     sssd_version: 1.16.3
     sssd_config_type: none
     freeipa_version: 4.6.4
-    freeipa_enable_server: false
-    freeipa_3rdparty_sssd_packages: true
+    freeipa_enable_server: False
+    freeipa_3rdparty_sssd_packages: True
   roles:
     - timorunge.sssd
     - timorunge.freeipa
@@ -183,14 +189,14 @@ dependencies on the SSSD libraries.
 ```yaml
 - hosts: freeipa-client
   vars:
-    sssd_from_sources: true
+    sssd_from_sources: True
     sssd_version: 1.16.3
     sssd_config_type: none
     freeipa_version: 4.6.4
-    freeipa_enable_server: false
-    freeipa_3rdparty_sssd_packages: true
+    freeipa_enable_server: False
+    freeipa_3rdparty_sssd_packages: True
       ...
-    freeipa_client_install_pkgs: false
+    freeipa_client_install_pkgs: False
     freeipa_client_domain: example.com
     freeipa_client_server: ipa.example.com
     freeipa_client_realm: EXAMPLE.COM
@@ -203,7 +209,7 @@ dependencies on the SSSD libraries.
       - "--realm={{ freeipa_client_realm }}"
       - "--principal={{ freeipa_client_principal }}"
       - "--password={{ freeipa_client_password }}"
-      - '--mkhomedir'
+      - "--mkhomedir"
       - "--hostname={{ freeipa_client_fqdn | default(ansible_fqdn) }}"
   roles:
     - timorunge.sssd
@@ -219,13 +225,13 @@ dependencies on the SSSD libraries.
 ```yaml
 - hosts: freeipa-server
   vars:
-    sssd_from_sources: true
+    sssd_from_sources: True
     sssd_version: 1.16.3
     sssd_config_type: none
     freeipa_version: 4.6.4
-    freeipa_enable_server: true
-    freeipa_3rdparty_sssd_packages: true
-    freeipa_server_install_pkgs: false
+    freeipa_enable_server: True
+    freeipa_3rdparty_sssd_packages: True
+    freeipa_server_install_pkgs: False
     freeipa_server_admin_password: Passw0rd
     freeipa_server_domain: example.com
     freeipa_server_ds_password: Passw0rd

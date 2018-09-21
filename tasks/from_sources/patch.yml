@@ -5,5 +5,6 @@
     dest: "{{ freeipa_install_dir }}/build/freeipa-release-{{ freeipa_version_src_schema }}/{{ item.value.dest_file }}"
     src: "{{ item.value.patch_file }}"
     state: "{{ item.value.state | default(present) }}"
-  with_dict: "{{ freeipa_patches | default(omit) }}"
+  loop: "{{ freeipa_patches | dict2items }}"
   register: freeipa_patches
+  when: freeipa_patches

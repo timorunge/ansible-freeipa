@@ -14,7 +14,7 @@
       - "patches/{{ ansible_os_family }}-{{ ansible_distribution }}-{{ freeipa_version }}.yml"
       - "patches/{{ ansible_os_family }}-{{ freeipa_version }}.yml"
       - "patches/{{ freeipa_version }}.yml"
-      skip: true
+      skip: True
 
 - include_tasks: dependencies.yml
 
