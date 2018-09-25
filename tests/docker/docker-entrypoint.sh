@@ -25,7 +25,7 @@ ansible-lint -c /etc/ansible/roles/${ansible_role}/.ansible-lint -r \
   /etc/ansible/roles/${ansible_role}
 ansible-lint -c /etc/ansible/roles/${ansible_role}/.ansible-lint -r \
   /etc/ansible/lint/galaxy-lint-rules-master/rules \
-  /ansible/test.yml
+  /ansible/${yml_file}
 
 ansible-playbook /ansible/${yml_file} \
   -i /ansible/inventory \

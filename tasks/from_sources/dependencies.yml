@@ -71,36 +71,36 @@
   package:
     name: "{{ freeipa_dependency_pkgs }}"
     state: present
-    update_cache: yes
+    update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
 
 - name: Install FreeIPA SSSD dependencies
   package:
     name: "{{ freeipa_sssd_dependency_pkgs }}"
     state: present
-    update_cache: yes
+    update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
   when: not freeipa_3rdparty_sssd_packages
 
 - name: Install FreeIPA server dependencies
   package:
     name: "{{ freeipa_dependency_pkgs_srv }}"
     state: present
-    update_cache: yes
+    update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
   when: freeipa_enable_server
 
 - name: Install FreeIPA build dependencies
   package:
     name: "{{ freeipa_build_dependency_pkgs }}"
     state: present
-    update_cache: yes
+    update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
 
 - name: Install FreeIPA SSSD build dependencies
   package:
     name: "{{ freeipa_build_sssd_dependency_pkgs }}"
     state: present
-    update_cache: yes
+    update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
   when: not freeipa_3rdparty_sssd_packages
 
 - name: Install FreeIPA pip dependencies
   pip:
-    name: "{{ freeipa_pip_dependency_pkgs | default(omit) }}"
+    name: "{{ freeipa_pip_dependency_pkgs }}"
     state: present

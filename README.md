@@ -5,8 +5,9 @@ This role is [mainly](#little-secret) building and installing the
 [FreeIPA binaries](https://www.freeipa.org/page/Main_Page) directly out of the
 source code.
 
-At the moment the role supports only for Debian and Ubuntu. But RHEL based
-distributions have an better FreeIPA coverage anyway.
+At the moment the role supports Debian 9.4 and Ubuntu >= 18.04 (see
+[testing](#testing)). But RHEL based distributions have an better FreeIPA
+coverage anyway.
 
 It's providing an easy way to patch the FreeIPA sources according to
 your needs. The role is getting shipped with tested and working default values
