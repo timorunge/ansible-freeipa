@@ -26,3 +26,4 @@ galaxy_info:
     - sso
     - sssd
     - system
+  dependencies: []
