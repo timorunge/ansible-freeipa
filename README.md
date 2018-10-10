@@ -1,7 +1,6 @@
-freeipa
-=======
+# freeipa
 
-This role is [mainly](#little-secret) building and installing the
+This role is mainly building and installing the
 [FreeIPA binaries](https://www.freeipa.org/page/Main_Page) directly out of the
 source code.
 
@@ -21,30 +20,18 @@ details please take a look at the [dependencies](#dependencies),
 [example 4](#4-install-freeipa-with-timorungesssd) and
 [example 5](#5-install-freeipa-with-timorungesssd-and-timorungefreeipa_client).
 
-Tested platforms are:
-* Debian
-  * 9.4 (Stretch)
-    Requires
-    * [timorunge.sssd](https://github.com/timorunge/ansible-sssd)
-* Ubuntu
-  * 18.04 (Bionic Beaver)
-  * 18.10 (Cosmic Cuttlefish)
-
 The role is not build for the setup or configuration of FreeIPA itself. You
 can use the following Ansible roles for this:
 
-* [timorunge.freeipa_client](https://github.com/timorunge/ansible-freeipa-client)
-* [timorunge.freeipa_server](https://github.com/timorunge/ansible-freeipa-server)
-* [timorunge.freeipa_server_backup](https://github.com/timorunge/ansible-freeipa-server-backup)
+- [timorunge.freeipa_client](https://github.com/timorunge/ansible-freeipa-client)
+- [timorunge.freeipa_server](https://github.com/timorunge/ansible-freeipa-server)
+- [timorunge.freeipa_server_backup](https://github.com/timorunge/ansible-freeipa-server-backup)
 
-### Little secret
-
-To keep the usage of roles to an minumum you also have the possibility to
-install FreeIPA out of the repositories of your distribution
+**Little secret:** To keep the usage of roles to an minumum you also have the
+possibility to install FreeIPA out of the repositories of your distribution
 (set `freeipa_from_sources: False`). RHEL based systems are supported.
 
-Requirements
-------------
+## Requirements
 
 This role requires
 [Ansible 2.6.0](https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_6.html)
@@ -58,15 +45,13 @@ pip install ansible==2.7.0
 
 All platform requirements are listed in the metadata file.
 
-Install
--------
+## Install
 
 ```sh
 ansible-galaxy install timorunge.freeipa
 ```
 
-Role Variables
---------------
+## Role Variables
 
 The variables that can be passed to this role. You can find a brief description
 in this paragraph. For all variables, take a look at
@@ -109,8 +94,7 @@ freeipa_patches: "{{ freeipa_default_patches }}"
 freeipa_build_options: "{{ freeipa_default_build_options }}"
 ```
 
-Examples
---------
+## Examples
 
 To keep the document lean the compile options are stripped.
 You can find the FreeIPA build options in [this section](#freeipa-build-options).
@@ -245,8 +229,7 @@ dependencies on the SSSD libraries.
     - timorunge.freeipa_server
 ```
 
-FreeIPA build options
----------------------
+## FreeIPA build options
 
 An overview of the build options for FreeIPA (4.6.4).
 
@@ -452,8 +435,7 @@ it to find libraries and programs with nonstandard names/locations.
 Report bugs to <https://hosted.fedoraproject.org/projects/freeipa/newticket>.
 ```
 
-Testing
--------
+## Testing
 
 [![Build Status](https://travis-ci.org/timorunge/ansible-freeipa.svg?branch=master)](https://travis-ci.org/timorunge/ansible-freeipa)
 
@@ -461,9 +443,10 @@ Tests are done with [Docker](https://www.docker.com) and
 [docker_test_runner](https://github.com/timorunge/docker-test-runner) which
 brings up the following containers with different environment settings:
 
-* Debian 9.4 (Stretch)
-* Ubuntu 18.04 (Bionic Beaver)
-* Ubuntu 18.10 (Cosmic Cuttlefish)
+- Debian 9.4 (Stretch)
+  - Requires [timorunge.sssd](https://github.com/timorunge/ansible-sssd)
+- Ubuntu 18.04 (Bionic Beaver)
+- Ubuntu 18.10 (Cosmic Cuttlefish)
 
 Ansible 2.7.0 is installed on all containers and a
 [test playbook](tests/test.yml) is getting applied.
@@ -481,17 +464,16 @@ curl https://raw.githubusercontent.com/timorunge/docker-test-runner/master/insta
 Since the build time on Travis is limited for public repositories the
 automated tests are limited to:
 
-* Debian 9.4 (Stretch)
-* Ubuntu 18.04 (Bionic Beaver)
+- Debian 9.4 (Stretch)
+- Ubuntu 18.04 (Bionic Beaver)
 
-Dependencies
-------------
+## Dependencies
 
 If you want to install FreeIPA (4.6.4) on Debian 9.4 you have to ensure that
 you have:
 
-* libsss-idmap >= 1.15.2
-* libsss-nss-idmap >= 1.15.2
+- libsss-idmap >= 1.15.2
+- libsss-nss-idmap >= 1.15.2
 
 You can check this with `pkg-config`:
 
@@ -502,15 +484,15 @@ pkg-config --modversion sss_nss_idmap
 
 Since Debian 9.4 is not providing actual SSSD libraries and binaries
 (>= 1.15.2) you can use the following Ansible role:
-* [timorunge.sssd](https://github.com/timorunge/ansible-sssd)
+
+- [timorunge.sssd](https://github.com/timorunge/ansible-sssd)
 
 Take a look at [example 4](#4-install-freeipa-with-timorungesssd).
 
-License
--------
+## License
+
 BSD
 
-Author Information
-------------------
+## Author Information
 
 - Timo Runge
