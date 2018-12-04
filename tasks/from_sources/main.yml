@@ -1,6 +1,7 @@
 ---
 
-- fail:
+- name: Check for valid user- and group names
+  fail:
     msg: "Due to missing dependencies it's not possible to enable the FreeIPA server on Debian."
   when: (freeipa_enable_server) and
         (ansible_os_family == "Debian") and

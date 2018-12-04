@@ -72,12 +72,20 @@
     name: "{{ freeipa_dependency_pkgs }}"
     state: present
     update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
+  delay: 10
+  register: result
+  retries: 3
+  until: result is succeeded
 
 - name: Install FreeIPA SSSD dependencies
   package:
     name: "{{ freeipa_sssd_dependency_pkgs }}"
     state: present
     update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
+  delay: 10
+  register: result
+  retries: 3
+  until: result is succeeded
   when: not freeipa_3rdparty_sssd_packages
 
 - name: Install FreeIPA server dependencies
@@ -85,6 +93,10 @@
     name: "{{ freeipa_dependency_pkgs_srv }}"
     state: present
     update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
+  delay: 10
+  register: result
+  retries: 3
+  until: result is succeeded
   when: freeipa_enable_server
 
 - name: Install FreeIPA build dependencies
@@ -92,15 +104,27 @@
     name: "{{ freeipa_build_dependency_pkgs }}"
     state: present
     update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
+  delay: 10
+  register: result
+  retries: 3
+  until: result is succeeded
 
 - name: Install FreeIPA SSSD build dependencies
   package:
     name: "{{ freeipa_build_sssd_dependency_pkgs }}"
     state: present
     update_cache: "{{ omit if ((ansible_pkg_mgr == 'dnf') and (ansible_version is version('2.7', '<'))) else 'yes' }}"
+  delay: 10
+  register: result
+  retries: 3
+  until: result is succeeded
   when: not freeipa_3rdparty_sssd_packages
 
 - name: Install FreeIPA pip dependencies
   pip:
     name: "{{ freeipa_pip_dependency_pkgs }}"
     state: present
+  delay: 10
+  register: result
+  retries: 3
+  until: result is succeeded

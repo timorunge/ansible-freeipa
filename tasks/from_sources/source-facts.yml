@@ -6,10 +6,12 @@
   changed_when: freeipa_dpkg_architecture_exec.rc != 0
   when: ansible_os_family == "Debian"
 
-- set_fact:
+- name: Set dpkg architecture fact
+  set_fact:
     freeipa_dpkg_architecture: "{{ freeipa_dpkg_architecture_exec.stdout }}"
   when: ansible_os_family == "Debian"
 
-- set_fact:
+- name: Set enable server fact
+  set_fact:
     freeipa_build_enable_server: enable-server
   when: freeipa_enable_server

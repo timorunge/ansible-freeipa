@@ -10,3 +10,5 @@
         (freeipa_source_files.changed) or
         (freeipa_patches.changed) or
         (freeipa_force_build)
+  tags:
+    - skip_ansible_lint

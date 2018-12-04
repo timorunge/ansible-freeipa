@@ -5,9 +5,13 @@
     chdir: "{{ freeipa_install_dir }}/build/freeipa-release-{{ freeipa_version_src_schema }}"
   register: freeipa_compile
   when: freeipa_build.changed
+  tags:
+    - skip_ansible_lint
 
 - name: Install FreeIPA
   make:
     chdir: "{{ freeipa_install_dir }}/build/freeipa-release-{{ freeipa_version_src_schema }}"
     target: install
   when: freeipa_compile.changed
+  tags:
+    - skip_ansible_lint
