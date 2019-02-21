@@ -4,13 +4,13 @@
 
 # Enable FreeIPA server
 # Type: Bool
-freeipa_enable_server: False
+freeipa_enable_server: false
 
 # FreeIPA from source
 
 # Install FreeIPA from sources
 # Type: Bool
-freeipa_from_sources: True
+freeipa_from_sources: true
 
 # Version definition
 # Type: Int
@@ -24,7 +24,7 @@ freeipa_version_src_schema: "{{ freeipa_version | replace('.', '-') }}"
 # 3rd party component (like timorunge.sssd) to install those packages
 # ensure that those packages are installed before the execution of this role.
 # Type: Bool
-freeipa_3rdparty_sssd_packages: False
+freeipa_3rdparty_sssd_packages: false
 
 # Define the download url
 # Type: Str
@@ -59,7 +59,7 @@ freeipa_patches: "{{ freeipa_default_patches }}"
 
 # Force a build
 # Type: Bool
-freeipa_force_build: False
+freeipa_force_build: false
 
 # The default build options are stored in `vars/{{ ansible_os_family }}.yml`
 # Type: List

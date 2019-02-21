@@ -12,7 +12,7 @@ test -z ${sssd_version} && echo "Missing environment variable: sssd_version" && 
 
 test -z ${yml_file} && echo "Missing environment variable: yml_file" && exit 1
 
-test "True" = "${sssd_from_sources}" && ansible-galaxy install timorunge.sssd
+test "true" = "${sssd_from_sources}" && ansible-galaxy install timorunge.sssd
 
 ansible-lint -c /etc/ansible/roles/${ansible_role}/.ansible-lint \
   /etc/ansible/roles/${ansible_role}
@@ -54,7 +54,7 @@ ansible-playbook /ansible/${yml_file} \
   (echo "Idempotence test: pass" && exit 0) || \
   (echo "Idempotence test: fail" && exit 1)
 
-if [ "True" = "${freeipa_from_sources}" ] && [ "True" = "${freeipa_enable_server}" ] ; then
+if [ "true" = "${freeipa_from_sources}" ] && [ "true" = "${freeipa_enable_server}" ] ; then
   real_freeipa_version=$(ipa --version | awk '{print $2}' | tr -d "," 2>&1)
   test "${real_freeipa_version}" = "${freeipa_version}" && \
     (echo "FreeIPA version test: pass" && exit 0) || \

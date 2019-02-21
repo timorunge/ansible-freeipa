@@ -29,7 +29,7 @@ can use the following Ansible roles for this:
 
 **Little secret:** To keep the usage of roles to an minumum you also have the
 possibility to install FreeIPA out of the repositories of your distribution
-(set `freeipa_from_sources: False`). RHEL based systems are supported.
+(set `freeipa_from_sources: false`). RHEL based systems are supported.
 
 ## Requirements
 
@@ -40,7 +40,7 @@ or higher in order to apply [patches](#2-apply-patches-to-the-source).
 You can simply use pip to install (and define) a stable version:
 
 ```sh
-pip install ansible==2.7.6
+pip install ansible==2.7.7
 ```
 
 All platform requirements are listed in the metadata file.
@@ -61,13 +61,13 @@ in this paragraph. For all variables, take a look at
 
 # Enable FreeIPA server
 # Type: Bookl
-freeipa_enable_server: False
+freeipa_enable_server: false
 
 # FreeIPA from source:
 
 # Install FreeIPA from sources
 # Type: Bool
-freeipa_from_sources: True
+freeipa_from_sources: true
 
 # Version definition:
 # Type: Int
@@ -77,7 +77,7 @@ freeipa_version: 4.6.4
 # 3rd party component (like timorunge.sssd) to install those packages
 # ensure that those packages are installed before the execution of this role.
 # Type: Bool
-freeipa_3rdparty_sssd_packages: False
+freeipa_3rdparty_sssd_packages: false
 
 # Patches
 
@@ -105,7 +105,7 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 - hosts: freeipa
   vars:
     freeipa_version: 4.6.4
-    freeipa_enable_server: False
+    freeipa_enable_server: false
     freeipa_build_options:
       - "--datadir=/usr/share"
       - "--disable-rpath"
@@ -121,7 +121,7 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 - hosts: freeipa
   vars:
     freeipa_version: 4.6.4
-    freeipa_enable_server: False
+    freeipa_enable_server: false
     freeipa_patches:
       create-sysconfig-ods:
         dest_file: ipaserver/install/opendnssecinstance.py
@@ -137,7 +137,7 @@ You can find the FreeIPA build options in [this section](#freeipa-build-options)
 - hosts: freeipa-client
   vars:
     freeipa_version: 4.6.4
-    freeipa_enable_server: False
+    freeipa_enable_server: false
     freeipa_build_options:
       - "--datadir=/usr/share"
       - "--disable-rpath"
@@ -155,12 +155,12 @@ dependencies on the SSSD libraries.
 ```yaml
 - hosts: freeipa
   vars:
-    sssd_from_sources: True
+    sssd_from_sources: true
     sssd_version: 1.16.3
     sssd_config_type: none
     freeipa_version: 4.6.4
-    freeipa_enable_server: False
-    freeipa_3rdparty_sssd_packages: True
+    freeipa_enable_server: false
+    freeipa_3rdparty_sssd_packages: true
   roles:
     - timorunge.sssd
     - timorunge.freeipa
@@ -174,14 +174,14 @@ dependencies on the SSSD libraries.
 ```yaml
 - hosts: freeipa-client
   vars:
-    sssd_from_sources: True
+    sssd_from_sources: true
     sssd_version: 1.16.3
     sssd_config_type: none
     freeipa_version: 4.6.4
-    freeipa_enable_server: False
-    freeipa_3rdparty_sssd_packages: True
+    freeipa_enable_server: false
+    freeipa_3rdparty_sssd_packages: true
       ...
-    freeipa_client_install_pkgs: False
+    freeipa_client_install_pkgs: false
     freeipa_client_domain: example.com
     freeipa_client_server: ipa.example.com
     freeipa_client_realm: EXAMPLE.COM
@@ -210,13 +210,13 @@ dependencies on the SSSD libraries.
 ```yaml
 - hosts: freeipa-server
   vars:
-    sssd_from_sources: True
+    sssd_from_sources: true
     sssd_version: 1.16.3
     sssd_config_type: none
     freeipa_version: 4.6.4
-    freeipa_enable_server: True
-    freeipa_3rdparty_sssd_packages: True
-    freeipa_server_install_pkgs: False
+    freeipa_enable_server: true
+    freeipa_3rdparty_sssd_packages: true
+    freeipa_server_install_pkgs: false
     freeipa_server_admin_password: Passw0rd
     freeipa_server_domain: example.com
     freeipa_server_ds_password: Passw0rd
@@ -448,7 +448,7 @@ brings up the following containers with different environment settings:
 - Ubuntu 18.04 (Bionic Beaver)
 - Ubuntu 18.10 (Cosmic Cuttlefish)
 
-Ansible 2.7.6 is installed on all containers and a
+Ansible 2.7.7 is installed on all containers and a
 [test playbook](tests/test.yml) is getting applied.
 
 For further details and additional checks take a look at the
@@ -491,7 +491,7 @@ Take a look at [example 4](#4-install-freeipa-with-timorungesssd).
 
 ## License
 
-[BSD 3-Clause "New" or "Revised" License](https://spdx.org/licenses/BSD-3-Clause.html)
+[BSD 3-Clause "New" or "Revised" License](LICENSE)
 
 ## Author Information
 
