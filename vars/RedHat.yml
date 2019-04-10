@@ -7,9 +7,51 @@ freeipa_pkgs:
   - ipa-client-common
   - ipa-common
 
+# FreeIPA pip dependencies
+# Type: List
+freeipa_pip_dependency_pkgs: []
+
 # FreeIPA server packages
 # Type: List
 freeipa_srv_pkgs:
   - ipa-server
   - ipa-server-common
   - ipa-server-dns
+
+# FreeIPA dependency packages
+# Type: List
+freeipa_dependency_pkgs:
+  - krb5-libs
+  - realmd
+
+# FreeIPA SSSD dependency packages
+# Type: List
+freeipa_sssd_dependency_pkgs: []
+
+# FreeIPA SSSD build dependency packages
+# Type: List
+freeipa_build_sssd_dependency_pkgs: []
+
+# FreeIPA server dependencies
+# Type: List
+freeipa_dependency_pkgs_srv: []
+
+# FreeIPA build dependency packages
+# Type: List
+freeipa_build_dependency_pkgs: []
+
+# Directories
+# Type: Dict
+freeipa_dirs: {}
+
+freeipa_httpd_dirs: {}
+
+# httpd service information
+# Type: Str
+freeipa_httpd_service: httpd
+freeipa_httpd_user: apache
+freeipa_httpd_group: "{{ freeipa_httpd_user }}"
+
+# FreeIPA default build options
+# Type: List
+freeipa_default_build_options: []

@@ -26,10 +26,12 @@ freeipa_dependency_pkgs:
   - gnupg2
   - keyutils
   - libxmlrpc-core-c3
+  - ntp
   - oddjob-mkhomedir
   - opendnssec
   - python-cffi
   - python-samba
+  - realmd
   - samba
   - samba-common
   - winbind
@@ -84,12 +86,12 @@ freeipa_dependency_pkgs_srv:
   - libjs-jquery
   - libnss3-tools
   - libsasl2-modules-gssapi-mit
-  - ntp
   - oddjob
   - p11-kit
   - pki-base
   - python-dateutil
   - python-systemd
+  - slapd
   - slapi-nis
   - softhsm2
   - systemd-sysv
@@ -135,6 +137,8 @@ freeipa_build_dependency_pkgs:
   - libpopt-dev
   - librhino-java
   - libsasl2-dev
+  - libsasl2-modules-gssapi-mit
+  - libsasl2-modules-ldap
   - libssl-dev
   - libsvrcore-dev
   - libtalloc-dev
@@ -194,7 +198,6 @@ freeipa_build_dependency_pkgs:
   - python-yubico
   - rhino
   - samba-dev
-  - slapd
   - systemd
   - uuid-dev
   - xz-utils
@@ -207,7 +210,7 @@ freeipa_dirs:
     mode: !!str 0755
     owner: root
   "/var/run/ipa":
-    group: ipaapi
+    group: root
     mode: !!str 0711
     owner: root
   "/var/run/ipa/ccaches":

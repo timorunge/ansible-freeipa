@@ -1,6 +1,11 @@
 ---
 
-- name: Check for valid user- and group names
+- name: Check for OS family
+  fail:
+    msg: "This role is currently not supporting to build FreeIPA out of sources for RedHat based systems."
+  when: ansible_os_family == "RedHat"
+
+- name: Check for Debian specific distribution
   fail:
     msg: "Due to missing dependencies it's not possible to enable the FreeIPA server on Debian."
   when: (freeipa_enable_server) and

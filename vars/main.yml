@@ -6,14 +6,15 @@ freeipa_pip_dependency_pkgs:
   - cryptography
   - custodia
   - dbus-python
+  - google-auth-oauthlib
+  - gssapi
   - jslint
   - jwcrypto
   - kdcproxy
   - osutil
   - paramiko==2.2.0
-  - pyasn1
+  - pyasn1>=0.4.1
   - pyasn1-modules
-  - gssapi
   - python-ldap
 
 # Empty dict to avoid failures

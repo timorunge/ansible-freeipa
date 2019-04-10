@@ -32,7 +32,8 @@
     state: stopped
     enabled: no
   loop: "{{ freeipa_server_disabled_services | flatten(levels=1) }}"
-  when: freeipa_server_disabled_services
+  when: freeipa_enable_server and
+        freeipa_server_disabled_services
   tags:
     - skip_ansible_lint
 

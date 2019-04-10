@@ -76,6 +76,7 @@
   register: result
   retries: 3
   until: result is succeeded
+  when: freeipa_dependency_pkgs
 
 - name: Install FreeIPA SSSD dependencies
   package:
@@ -86,7 +87,8 @@
   register: result
   retries: 3
   until: result is succeeded
-  when: not freeipa_3rdparty_sssd_packages
+  when: not freeipa_3rdparty_sssd_packages and
+        freeipa_sssd_dependency_pkgs
 
 - name: Install FreeIPA server dependencies
   package:
@@ -97,7 +99,8 @@
   register: result
   retries: 3
   until: result is succeeded
-  when: freeipa_enable_server
+  when: freeipa_enable_server and
+        freeipa_dependency_pkgs_srv
 
 - name: Install FreeIPA build dependencies
   package:
@@ -108,6 +111,7 @@
   register: result
   retries: 3
   until: result is succeeded
+  when: freeipa_build_dependency_pkgs
 
 - name: Install FreeIPA SSSD build dependencies
   package:
@@ -118,7 +122,8 @@
   register: result
   retries: 3
   until: result is succeeded
-  when: not freeipa_3rdparty_sssd_packages
+  when: not freeipa_3rdparty_sssd_packages and
+        freeipa_build_sssd_dependency_pkgs
 
 - name: Install FreeIPA pip dependencies
   pip:
@@ -128,3 +133,4 @@
   register: result
   retries: 3
   until: result is succeeded
+  when: freeipa_pip_dependency_pkgs
