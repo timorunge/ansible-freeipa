@@ -15,7 +15,7 @@ docker_image_build_args:
 docker_image_path: "__PATH__/tests/docker"
 
 docker_images:
-  - Debian_9_4
+  - Debian_9
   - Ubuntu_18_04
   - Ubuntu_18_10
 
@@ -32,7 +32,7 @@ docker_container_environments:
     sssd_version: "1.16.4"
     yml_file: sssd_pkg.yml
     skip_images:
-      - Debian_9_4
+      - Debian_9
   sssd_src_1_16_3:
     freeipa_3rdparty_sssd_packages: "true"
     freeipa_enable_server: "true"
@@ -42,7 +42,7 @@ docker_container_environments:
     sssd_version: "1.16.4"
     yml_file: sssd_src.yml
     skip_images:
-      - Debian_9_4
+      - Debian_9
   sssd_src_1_16_3_no_srv:
     freeipa_3rdparty_sssd_packages: "true"
     freeipa_enable_server: "false"
